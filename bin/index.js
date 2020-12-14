@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const Twitter = require('twitter-lite')
 const fs = require('fs/promises')
 const dotenv = require('dotenv')

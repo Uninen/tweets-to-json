@@ -1,8 +1,11 @@
 {
   "name": "tweets-to-json",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Save your tweets into a JSON file.",
-  "main": "index.js",
+  "main": "bin/index.js",
+  "bin": {
+    "tweets-to-json": "./bin/index.js"
+  },
   "repository": "git@gitlab.com:uninen/tweets-to-json.git",
   "author": "Ville Säävuori <ville@unessa.net>",
   "license": "MIT",
