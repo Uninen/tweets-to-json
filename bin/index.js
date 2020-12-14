@@ -31,7 +31,7 @@ program
     'specify where to output the tweets',
     './tweets.json'
   )
-  .version('0.0.4')
+  .version('0.0.5')
   .parse(process.argv)
 
 async function queryTwitter(searchParams, last_id = null, since_id = null) {
@@ -88,7 +88,7 @@ async function fetchTweets(searchParams, exportFn) {
 
   const uniqFn = (x, y) => x.id === y.id
   const sortFn = (x) => x.timestamp
-  const finalTweets = R.sortBy(sortFn, R.uniqWith(uniqFn, tweets))
+  const finalTweets = R.reverse(R.sortBy(sortFn, R.uniqWith(uniqFn, tweets)))
   console.log('')
   process.stdout.write('Done. ')
   if (tweetsAtStart > 0) {

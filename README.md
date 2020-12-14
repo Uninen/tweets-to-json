@@ -2,7 +2,7 @@ Save your tweets into a JSON file using Twitter API. You can run it programatica
 
 This was originally built for an easy way to provide external data to Hugo data templates.
 
-Note: according to [user_timeline docs](https://developer.twitter.com/en/docs/twitter-api/v1/tweets/timelines/api-reference/get-statuses-user_timeline) it "can only return up to 3,200 of a user's most recent Tweets". YMMV. Read also [about Twitter's rate limits](https://developer.twitter.com/en/docs/rate-limits).
+Note: this script is not intended for huge datasets, it handles all tweets in memory. According to [user_timeline docs](https://developer.twitter.com/en/docs/twitter-api/v1/tweets/timelines/api-reference/get-statuses-user_timeline) it "can only return up to 3,200 of a user's most recent Tweets". YMMV. Read also [about Twitter's rate limits](https://developer.twitter.com/en/docs/rate-limits).
 
 ## Configuration
 
@@ -11,7 +11,7 @@ Note: according to [user_timeline docs](https://developer.twitter.com/en/docs/tw
 
 ## Usage
 
-When you run `tweets-to-json` first time, a `tweets.json` file (can be overrided) is created in the same directory and all your tweets are saved into it. Subsequent invocations will check the file, take the latest tweets ID, and only query for tweets after that ID. The tweets are saved in order, latest tweet last.
+When you run `tweets-to-json` first time, a `tweets.json` file (can be overrided) is created in the same directory and all your tweets are saved into it. Subsequent invocations will check the file, take the latest tweets ID, and only query for tweets after that ID. The tweets are saved in order, latest tweet first.
 
 With `yarn` or `npm`:
 
