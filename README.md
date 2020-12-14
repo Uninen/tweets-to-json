@@ -1,4 +1,4 @@
-Node module that saves your tweets into a JSON file using Twitter API. You can run it programatically (for example with GitLab or GitHub CI) to automatically keep a JSON archive of your tweets.
+Save your tweets into a JSON file using Twitter API. You can run it programatically (for example with GitLab or GitHub CI) to automatically keep a JSON archive of your tweets.
 
 This was originally built for an easy way to provide external data to Hugo data templates.
 
@@ -89,5 +89,9 @@ module.exports = {
   },
 }
 ```
+
+## Contributing
+
+All contributions are welcome! Please follow the [code of conduct](https://www.contributor-covenant.org/version/2/0/code_of_conduct/) when interacting with others.
 
 [Follow @Uninen](https://twitter.com/uninen) on Twitter.
