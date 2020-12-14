@@ -1,6 +1,6 @@
 {
   "name": "tweets-to-json",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Save your tweets into a JSON file.",
   "main": "bin/index.js",
   "bin": {

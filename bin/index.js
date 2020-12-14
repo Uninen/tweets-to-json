@@ -31,7 +31,7 @@ program
     'specify where to output the tweets',
     './tweets.json'
   )
-  .version('0.0.1')
+  .version('0.0.4')
   .parse(process.argv)
 
 async function queryTwitter(searchParams, last_id = null, since_id = null) {
@@ -111,14 +111,17 @@ async function fetchTweets(searchParams, exportFn) {
 explorer
   .search()
   .then((result) => {
-    if (result.config.searchParams && result.config.exportFn) {
+    if (result === null) {
+      console.error('Error: config file not found.')
+      process.exit(1)
+    } else if (result.config.searchParams && result.config.exportFn) {
       fetchTweets(result.config.searchParams, result.config.exportFn).then(
         () => {
           console.log('')
         }
       )
     } else {
-      console.error('Error: searchParams or exportFn not found in config')
+      console.error('Error: searchParams or exportFn not found in config.')
       process.exit(1)
     }
   })
