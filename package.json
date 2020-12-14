@@ -1,0 +1,16 @@
+{
+  "name": "tweets-to-json",
+  "version": "0.0.1",
+  "description": "Save your tweets into a JSON file",
+  "main": "index.js",
+  "repository": "git@gitlab.com:uninen/tweets-to-json.git",
+  "author": "Ville Säävuori <ville@unessa.net>",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^6.2.1",
+    "cosmiconfig": "^7.0.0",
+    "dotenv": "^8.2.0",
+    "rambda": "^6.4.0",
+    "twitter-lite": "^0.14.0"
+  }
+}
