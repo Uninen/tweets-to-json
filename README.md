@@ -6,7 +6,7 @@ Note: this script is not intended for huge datasets, it handles all tweets in me
 
 ## Configuration
 
-1. Get `Bearer token` key for your app from [Twitter Developer Portal](https://developer.twitter.com/en/portal/dashboard) and add it to `TWITTER_BEARER_TOKEN` environment variable.
+1. Get `Bearer token` key for your app from [Twitter Developer Portal](https://developer.twitter.com/en/portal/dashboard) and add it to `TWITTER_BEARER_TOKEN` environment variable (or to `.env` file in the root of your project)
 2. Create `tweets-to-json-config.js` with `searchParams` and `exportFn` (see example below)
 
 ## Usage
@@ -93,5 +93,7 @@ module.exports = {
 ## Contributing
 
 All contributions are welcome! Please follow the [code of conduct](https://www.contributor-covenant.org/version/2/0/code_of_conduct/) when interacting with others.
+
+[This project lives on GitLab](https://gitlab.com/uninen/tweets-to-json) and is mirrored on GitHub.
 
 [Follow @Uninen](https://twitter.com/uninen) on Twitter.
