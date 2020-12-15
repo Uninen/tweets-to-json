@@ -1,11 +1,13 @@
 #!/usr/bin/env node
 const Twitter = require('twitter-lite')
 const fs = require('fs/promises')
+const path = require('path')
 const dotenv = require('dotenv')
 const { Command } = require('commander')
 const R = require('rambda')
 const { cosmiconfig } = require('cosmiconfig')
 const package = require('../package.json')
+const appRoot = require('app-root-path')
 
 let tweets = []
 let lastId = null
@@ -13,6 +15,7 @@ let prevLastId = null
 let sinceId = null
 let tweetsAtStart = 0
 
+const dotresult = dotenv.config(path.resolve(appRoot.path, '.env'))
 const explorer = cosmiconfig('tweets-to-json')
 const program = new Command()
 const client = new Twitter({
@@ -20,7 +23,6 @@ const client = new Twitter({
   bearer_token: process.env.TWITTER_BEARER_TOKEN,
 })
 
-dotenv.config()
 program
   .option(
     '-o, --output-file <filepath>',
@@ -29,11 +31,6 @@ program
   )
   .version(package.version)
   .parse(process.argv)
-
-if (!process.env.TWITTER_BEARER_TOKEN) {
-  console.error('Error: TWITTER_BEARER_TOKEN environment variable not set.')
-  process.exit(1)
-}
 
 async function queryTwitter(searchParams, last_id = null, since_id = null) {
   if (last_id) {
@@ -51,7 +48,7 @@ async function fetchTweets(searchParams, exportFn) {
   try {
     const contents = await fs.readFile(program.outputFile, { encoding: 'utf8' })
     tweets = JSON.parse(contents)
-    sinceId = tweets[tweets.length - 1].id
+    sinceId = tweets[0].id
     tweetsAtStart = tweets.length
     console.log(`✓ Found existing file with ${tweetsAtStart} tweets.`)
   } catch (err) {
@@ -109,25 +106,32 @@ async function fetchTweets(searchParams, exportFn) {
   await fs.writeFile(program.outputFile, JSON.stringify(finalTweets, null, 2))
 }
 
-explorer
-  .search()
-  .then((result) => {
-    if (result === null) {
-      console.error('Error: config file not found.')
-      process.exit(1)
-    } else if (result.config.searchParams && result.config.exportFn) {
-      fetchTweets(result.config.searchParams, result.config.exportFn).then(
-        () => {
-          console.log('')
-        }
-      )
-    } else {
-      console.error('Error: searchParams or exportFn not found in config.')
-      process.exit(1)
-    }
-  })
-  .catch((error) => {
-    console.error('Error: configuration file not found or malformed.')
-    console.error(error)
+;(async () => {
+  if (!process.env.TWITTER_BEARER_TOKEN) {
+    console.error('Error: TWITTER_BEARER_TOKEN environment variable not set.')
     process.exit(1)
-  })
+  }
+
+  explorer
+    .search()
+    .then((result) => {
+      if (result === null) {
+        console.error('Error: config file not found.')
+        process.exit(1)
+      } else if (result.config.searchParams && result.config.exportFn) {
+        fetchTweets(result.config.searchParams, result.config.exportFn).then(
+          () => {
+            console.log('')
+          }
+        )
+      } else {
+        console.error('Error: searchParams or exportFn not found in config.')
+        process.exit(1)
+      }
+    })
+    .catch((error) => {
+      console.error('Error: configuration file not found or malformed.')
+      console.error(error)
+      process.exit(1)
+    })
+})()

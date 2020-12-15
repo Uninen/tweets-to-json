@@ -1,6 +1,6 @@
 {
   "name": "tweets-to-json",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "description": "Save your tweets into a JSON file.",
   "main": "bin/index.js",
   "bin": {
@@ -10,6 +10,7 @@
   "author": "Ville Säävuori <ville@unessa.net>",
   "license": "MIT",
   "dependencies": {
+    "app-root-path": "^3.0.0",
     "commander": "^6.2.1",
     "cosmiconfig": "^7.0.0",
     "dotenv": "^8.2.0",
