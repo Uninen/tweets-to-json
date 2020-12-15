@@ -5,11 +5,7 @@ const dotenv = require('dotenv')
 const { Command } = require('commander')
 const R = require('rambda')
 const { cosmiconfig } = require('cosmiconfig')
-
-if (!process.env.TWITTER_BEARER_TOKEN) {
-  console.error('Error: TWITTER_BEARER_TOKEN environment variable not set.')
-  process.exit(1)
-}
+const package = require('../package.json')
 
 let tweets = []
 let lastId = null
@@ -31,8 +27,13 @@ program
     'specify where to output the tweets',
     './tweets.json'
   )
-  .version('0.0.5')
+  .version(package.version)
   .parse(process.argv)
+
+if (!process.env.TWITTER_BEARER_TOKEN) {
+  console.error('Error: TWITTER_BEARER_TOKEN environment variable not set.')
+  process.exit(1)
+}
 
 async function queryTwitter(searchParams, last_id = null, since_id = null) {
   if (last_id) {
