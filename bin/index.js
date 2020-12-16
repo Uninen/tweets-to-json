@@ -6,7 +6,7 @@ const dotenv = require('dotenv')
 const { Command } = require('commander')
 const R = require('rambda')
 const { cosmiconfig } = require('cosmiconfig')
-const package = require('../package.json')
+const pkg = require('../package.json')
 const appRoot = require('app-root-path')
 
 let tweets = []
@@ -29,7 +29,7 @@ program
     'specify where to output the tweets',
     './tweets.json'
   )
-  .version(package.version)
+  .version(pkg.version)
   .parse(process.argv)
 
 async function queryTwitter(searchParams, last_id = null, since_id = null) {
