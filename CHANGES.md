@@ -1,5 +1,8 @@
 # Changelog
 
+## v0.2.0 - 2020-12-17
+
+- Added `--fail-when-zero` flag.
 ## v0.1.1 - 2020-12-16
 
 - Minor fixes.

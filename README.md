@@ -13,15 +13,14 @@ Note: this script is not intended for huge datasets, it handles all tweets in me
 
 When you run `tweets-to-json` first time, a `tweets.json` file (can be overrided) is created in the same directory and all your tweets are saved into it. Subsequent invocations will check the file, take the latest tweets ID, and only query for tweets after that ID. The tweets are saved in order, latest tweet first.
 
-With `yarn` or `npm`:
-
-`yarn tweets-to-json -h`
+If you run this from CI, you might find `--fail-when-zero` flag handy as it returns error code 1 when there are no tweets.
 
 ```
-Usage: tweets-to-json [options]
+Usage: tweets-to-json -o <filepath> [options]
 
 Options:
   -o, --output-file <filepath>  specify where to output the tweets (default: "./tweets.json")
+  --fail-when-zero              return exit status 1 if no new tweets are found
   -V, --version                 output the version number
   -h, --help                    display help for command
 ```

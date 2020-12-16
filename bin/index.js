@@ -29,6 +29,7 @@ program
     'specify where to output the tweets',
     './tweets.json'
   )
+  .option('--fail-when-zero', 'return exit status 1 if no new tweets are found')
   .version(pkg.version)
   .parse(process.argv)
 
@@ -99,6 +100,9 @@ async function fetchTweets(searchParams, exportFn) {
       process.stdout.write(`${diff} new tweet${plural} added.\n`)
     } else {
       process.stdout.write(`No new tweets found.\n`)
+      if (program.failWhenZero) {
+        process.exit(1)
+      }
     }
   } else {
     process.stdout.write(`Found ${finalTweets.length} tweets.\n`)
